@@ -25,10 +25,10 @@ public struct ConsumerCredential {
 public struct TokenCredential {
 
   // 请求返回的字符串中相关数据的key值
-  private let oauthTokenKey = "oauth_token"
-  private let oauthTokenSecretKey = "oauth_token_secret"
-  private let accessTokenKey = "access_token"
-  private let accessTokenSecretKey = "access_token_secret"
+  private static let oauthTokenKey = "oauth_token"
+  private static let oauthTokenSecretKey = "oauth_token_secret"
+  private static let accessTokenKey = "access_token"
+  private static let accessTokenSecretKey = "access_token_secret"
 
   public static let DefaultTokenIdentifier = "com.ewstudio.RxFanfouAPI.DefaultTokenIdentifier"
 
@@ -54,7 +54,8 @@ public struct TokenCredential {
       return nil
     }
 
-    guard let token = params[oauthTokenKey], secret = params[oauthTokenSecretKey] else {
+    guard let token = params[TokenCredential.oauthTokenKey],
+      secret = params[TokenCredential.oauthTokenSecretKey] else {
       return nil
     }
 
@@ -62,6 +63,19 @@ public struct TokenCredential {
     self.oauthTokenSecret = secret
 
     self.identifier = identifier
+  }
+
+  public mutating func updateAccessToken(accessTokenQuery query: String) -> Bool {
+    guard let params = query.ffa_queryParamaters,
+      token = params[TokenCredential.oauthTokenKey],
+      secret = params[TokenCredential.oauthTokenSecretKey] else {
+      return false
+    }
+
+    accessToken = token
+    accessTokenSecret = secret
+
+    return true
   }
 }
 
@@ -80,11 +94,19 @@ public enum AuthorizationType: String {
  *  OAuthManager负责处理OAuth相关的请求
  */
 struct OAuthManager {
+  
   private let consumerCredential: ConsumerCredential
   private let authorizationType: AuthorizationType
   private let provider = MoyaProvider<API.OAuth>()
 
-  func requestAuthorization(completion: Result<(TokenCredential, NSURL), Moya.Error> -> Void) {
+  private var tokenCredential: TokenCredential?
+
+  /**
+   请求授权信息以及URL
+
+   - parameter completion: 请求成功时，返回封装了OAuth Token的`TokenCredential`以及授权时需要打开的URL
+   */
+  mutating func requestAuthorization(completion: Result<(TokenCredential, NSURL), Moya.Error> -> Void) {
     provider.request(.RequestToken(consumerCredential)) { result in
       switch result {
       case .Success(let response):
@@ -104,6 +126,9 @@ struct OAuthManager {
         }
 
         let URL = NSURL(string: String(format: self.authorizationType.rawValue, credential.oauthTokenSecret, self.consumerCredential.callbackURL))!
+
+        self.tokenCredential = credential
+
         completion(.Success((credential, URL)))
 
       case .Failure(let error):
@@ -112,7 +137,41 @@ struct OAuthManager {
     }
   }
 
-  func requestAccessToken(completion: Result<(TokenCredential, NSURL), Moya.Error> -> Void) {
+  /**
+   请求Access Token
 
+   - parameter completion: 获取Access Token成功时，返回具体的`TokenCredential`
+   
+   */
+  mutating func requestAccessToken(completion: Result<TokenCredential, Moya.Error> -> Void) {
+    guard var credential = tokenCredential else {
+      return
+    }
+
+    provider.request(.AccessToken(consumerCredential, credential)) { result in
+      switch result {
+      case .Success(let response):
+
+        let accessTokenQuery: String
+
+        do {
+          accessTokenQuery = try response.filterSuccessfulStatusCodes().mapString()
+        } catch {
+          completion(.Failure(.Underlying(error)))
+          return
+        }
+
+        guard credential.updateAccessToken(accessTokenQuery: accessTokenQuery) else {
+          logger.error("获取Access Token的Query字符串有误")
+          completion(.Failure(.Underlying(APIErrors.IncorrectQueryString(accessTokenQuery))))
+          return
+        }
+
+        completion(.Success(credential))
+
+      case .Failure(let error):
+        completion(.Failure(error))
+      }
+    }
   }
 }
