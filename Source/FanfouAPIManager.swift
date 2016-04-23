@@ -11,7 +11,7 @@ import Foundation
 /**
  *  FanfouAPI管理器，整个SDK的入口
  */
-public struct FanfouAPIManager {
+public final class FanfouAPIManager {
 
   private let consumerCredential: ConsumerCredential
   private let authorizationType: AuthorizationType

@@ -12,7 +12,6 @@
 		4F7457E41CCA1E4700EF6783 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7457DE1CCA1E4600EF6783 /* Alamofire.framework */; };
 		4F7457E51CCA1E4700EF6783 /* Gloss.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7457DF1CCA1E4600EF6783 /* Gloss.framework */; };
 		4F7457E61CCA1E4700EF6783 /* Log.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7457E01CCA1E4600EF6783 /* Log.framework */; };
-		4F7457E81CCA1E4700EF6783 /* RxMoya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7457E21CCA1E4700EF6783 /* RxMoya.framework */; };
 		4F7457E91CCA1E4700EF6783 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7457E31CCA1E4700EF6783 /* RxSwift.framework */; };
 		4F7457FC1CCA1FAE00EF6783 /* RxFanfouAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F7457FA1CCA1FAE00EF6783 /* RxFanfouAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4F7457FE1CCA1FDB00EF6783 /* FanfouAPI.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F7457F81CCA1F7C00EF6783 /* FanfouAPI.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -43,6 +42,7 @@
 		4F7458871CCB7F3700EF6783 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7458861CCB7F3700EF6783 /* APIConstants.swift */; };
 		4F7458881CCB7F3700EF6783 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7458861CCB7F3700EF6783 /* APIConstants.swift */; };
 		4F74588B1CCBAF3700EF6783 /* OAuthManager+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F74588A1CCBAF3700EF6783 /* OAuthManager+Rx.swift */; };
+		4F7458A81CCBB5A200EF6783 /* Moya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7458051CCA481200EF6783 /* Moya.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,12 +89,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F7458A81CCBB5A200EF6783 /* Moya.framework in Frameworks */,
 				4F74581A1CCAF6D800EF6783 /* Result.framework in Frameworks */,
 				4F7458001CCA47B400EF6783 /* CryptoSwift.framework in Frameworks */,
 				4F7457E41CCA1E4700EF6783 /* Alamofire.framework in Frameworks */,
 				4F7457E51CCA1E4700EF6783 /* Gloss.framework in Frameworks */,
 				4F7457E61CCA1E4700EF6783 /* Log.framework in Frameworks */,
-				4F7457E81CCA1E4700EF6783 /* RxMoya.framework in Frameworks */,
 				4F7457E91CCA1E4700EF6783 /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
