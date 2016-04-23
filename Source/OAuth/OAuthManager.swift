@@ -102,7 +102,7 @@ public struct OAuthManager {
   private var tokenCredential: TokenCredential?
 
   init(credential: ConsumerCredential, authorizationType: AuthorizationType) {
-    self.consumerCredential = consumerCredential
+    self.consumerCredential = credential
     self.authorizationType = authorizationType
   }
 

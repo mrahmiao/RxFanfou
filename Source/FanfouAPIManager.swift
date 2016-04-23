@@ -21,13 +21,13 @@ public struct FanfouAPIManager {
   private let authorizationType: AuthorizationType
 
   public init(credential: ConsumerCredential, authorizationType: AuthorizationType = .Mobile) {
-    self.consumerCredential = consumerCredential
+    self.consumerCredential = credential
     self.authorizationType = authorizationType
   }
 
-  public private(set) lazy var OAuth: OAuthManager {
-    return OAuthManager(credential: consumerCredential, authorizationType: authorizationType)
-  }
+  public private(set) lazy var OAuth: OAuthManager = {
+    return OAuthManager(credential: self.consumerCredential, authorizationType: self.authorizationType)
+  }()
 }
 
 /**
