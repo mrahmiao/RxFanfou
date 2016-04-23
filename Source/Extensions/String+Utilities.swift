@@ -27,4 +27,13 @@ extension String {
 
     return result
   }
+
+  /// 对字符串进行Percent Encoding
+  public var ffa_urlEncodedString: String {
+    if let result = stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet(charactersInString: ":/?&=;+!@#$()',*").invertedSet) {
+      return result
+    }
+
+    return ""
+  }
 }
