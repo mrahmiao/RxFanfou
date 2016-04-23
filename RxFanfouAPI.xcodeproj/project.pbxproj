@@ -28,6 +28,12 @@
 		4F74580D1CCA4D0500EF6783 /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F74580B1CCA4D0500EF6783 /* OAuthManager.swift */; };
 		4F7458151CCA530200EF6783 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7458141CCA530200EF6783 /* APIManager.swift */; };
 		4F7458161CCA530200EF6783 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7458141CCA530200EF6783 /* APIManager.swift */; };
+		4F7458181CCA53B100EF6783 /* OAuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7458171CCA53B100EF6783 /* OAuthAPI.swift */; };
+		4F7458191CCA53B100EF6783 /* OAuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7458171CCA53B100EF6783 /* OAuthAPI.swift */; };
+		4F74581A1CCAF6D800EF6783 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7457E11CCA1E4600EF6783 /* Result.framework */; };
+		4F74581B1CCAF77000EF6783 /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7457E11CCA1E4600EF6783 /* Result.framework */; };
+		4F74581E1CCB100D00EF6783 /* String+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F74581D1CCB100D00EF6783 /* String+Utilities.swift */; };
+		4F74581F1CCB100D00EF6783 /* String+Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F74581D1CCB100D00EF6783 /* String+Utilities.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +66,8 @@
 		4F7458071CCA49D200EF6783 /* APIErrors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIErrors.swift; sourceTree = "<group>"; };
 		4F74580B1CCA4D0500EF6783 /* OAuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthManager.swift; sourceTree = "<group>"; };
 		4F7458141CCA530200EF6783 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		4F7458171CCA53B100EF6783 /* OAuthAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OAuthAPI.swift; sourceTree = "<group>"; };
+		4F74581D1CCB100D00EF6783 /* String+Utilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Utilities.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F74581A1CCAF6D800EF6783 /* Result.framework in Frameworks */,
 				4F7458001CCA47B400EF6783 /* CryptoSwift.framework in Frameworks */,
 				4F7457E41CCA1E4700EF6783 /* Alamofire.framework in Frameworks */,
 				4F7457E51CCA1E4700EF6783 /* Gloss.framework in Frameworks */,
@@ -88,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F74581B1CCAF77000EF6783 /* Result.framework in Frameworks */,
 				4F7458061CCA481200EF6783 /* Moya.framework in Frameworks */,
 				4F7458011CCA481200EF6783 /* Alamofire.framework in Frameworks */,
 				4F7458021CCA481200EF6783 /* CryptoSwift.framework in Frameworks */,
@@ -124,6 +134,7 @@
 		4F7457C51CCA1CE700EF6783 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				4F74581C1CCB0FC800EF6783 /* Extensions */,
 				4F74580A1CCA4CD900EF6783 /* OAuth */,
 				4F7458071CCA49D200EF6783 /* APIErrors.swift */,
 				4F7458141CCA530200EF6783 /* APIManager.swift */,
@@ -168,8 +179,17 @@
 			isa = PBXGroup;
 			children = (
 				4F74580B1CCA4D0500EF6783 /* OAuthManager.swift */,
+				4F7458171CCA53B100EF6783 /* OAuthAPI.swift */,
 			);
 			path = OAuth;
+			sourceTree = "<group>";
+		};
+		4F74581C1CCB0FC800EF6783 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				4F74581D1CCB100D00EF6783 /* String+Utilities.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,6 +337,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F74581E1CCB100D00EF6783 /* String+Utilities.swift in Sources */,
+				4F7458181CCA53B100EF6783 /* OAuthAPI.swift in Sources */,
 				4F7458151CCA530200EF6783 /* APIManager.swift in Sources */,
 				4F7458081CCA49D200EF6783 /* APIErrors.swift in Sources */,
 				4F74580C1CCA4D0500EF6783 /* OAuthManager.swift in Sources */,
@@ -335,6 +357,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F74581F1CCB100D00EF6783 /* String+Utilities.swift in Sources */,
+				4F7458191CCA53B100EF6783 /* OAuthAPI.swift in Sources */,
 				4F7458161CCA530200EF6783 /* APIManager.swift in Sources */,
 				4F7458091CCA49D200EF6783 /* APIErrors.swift in Sources */,
 				4F74580D1CCA4D0500EF6783 /* OAuthManager.swift in Sources */,
