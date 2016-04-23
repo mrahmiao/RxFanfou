@@ -42,6 +42,7 @@
 		4F7458611CCB62C400EF6783 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F74585F1CCB5DF100EF6783 /* APIService.swift */; };
 		4F7458871CCB7F3700EF6783 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7458861CCB7F3700EF6783 /* APIConstants.swift */; };
 		4F7458881CCB7F3700EF6783 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7458861CCB7F3700EF6783 /* APIConstants.swift */; };
+		4F74588B1CCBAF3700EF6783 /* OAuthManager+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F74588A1CCBAF3700EF6783 /* OAuthManager+Rx.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		4F74583D1CCB54F000EF6783 /* ParameterSignable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterSignable.swift; sourceTree = "<group>"; };
 		4F74585F1CCB5DF100EF6783 /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		4F7458861CCB7F3700EF6783 /* APIConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
+		4F74588A1CCBAF3700EF6783 /* OAuthManager+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OAuthManager+Rx.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +147,7 @@
 		4F7457C51CCA1CE700EF6783 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				4F7458891CCBAE7300EF6783 /* RxSwift */,
 				4F74583C1CCB54C100EF6783 /* Protocols */,
 				4F74581C1CCB0FC800EF6783 /* Extensions */,
 				4F74580A1CCA4CD900EF6783 /* OAuth */,
@@ -214,6 +217,14 @@
 				4F74583D1CCB54F000EF6783 /* ParameterSignable.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		4F7458891CCBAE7300EF6783 /* RxSwift */ = {
+			isa = PBXGroup;
+			children = (
+				4F74588A1CCBAF3700EF6783 /* OAuthManager+Rx.swift */,
+			);
+			path = RxSwift;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -365,6 +376,7 @@
 				4F74583A1CCB538600EF6783 /* Dictionary+Utilities.swift in Sources */,
 				4F74581E1CCB100D00EF6783 /* String+Utilities.swift in Sources */,
 				4F7458601CCB5DF100EF6783 /* APIService.swift in Sources */,
+				4F74588B1CCBAF3700EF6783 /* OAuthManager+Rx.swift in Sources */,
 				4F7458181CCA53B100EF6783 /* OAuthAPI.swift in Sources */,
 				4F7458151CCA530200EF6783 /* FanfouAPIManager.swift in Sources */,
 				4F7458871CCB7F3700EF6783 /* APIConstants.swift in Sources */,
