@@ -18,8 +18,8 @@ extension API {
    - AccessToken:  获取Access Token
    */
   enum OAuth {
-    case RequestToken(ConsumerCredential)
-    case AccessToken(ConsumerCredential, TokenCredential)
+    case RequestToken
+    case AccessToken
   }
 }
 
@@ -30,8 +30,8 @@ extension API.OAuth: TargetType {
 
   var path: String {
     switch self {
-    case .RequestToken(_): return "/request_token"
-    case .AccessToken(_, _): return "/access_token"
+    case .RequestToken: return "/request_token"
+    case .AccessToken: return "/access_token"
     }
   }
 
