@@ -112,7 +112,6 @@
 		4F7457B91CCA1CE700EF6783 = {
 			isa = PBXGroup;
 			children = (
-				4F7457FF1CCA47B400EF6783 /* CryptoSwift.framework */,
 				4F7457F71CCA1EF800EF6783 /* Supporting Files */,
 				4F7457DD1CCA1DFA00EF6783 /* Dependencies */,
 				4F7457C51CCA1CE700EF6783 /* Source */,
@@ -154,6 +153,7 @@
 		4F7457DD1CCA1DFA00EF6783 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				4F7457FF1CCA47B400EF6783 /* CryptoSwift.framework */,
 				4F7458051CCA481200EF6783 /* Moya.framework */,
 				4F7457DE1CCA1E4600EF6783 /* Alamofire.framework */,
 				4F7457DF1CCA1E4600EF6783 /* Gloss.framework */,
