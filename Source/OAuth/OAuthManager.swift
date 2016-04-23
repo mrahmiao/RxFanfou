@@ -93,7 +93,7 @@ public enum AuthorizationType: String {
 /**
  *  OAuthManager负责处理OAuth相关的请求
  */
-struct OAuthManager {
+public struct OAuthManager {
   
   private let consumerCredential: ConsumerCredential
   private let authorizationType: AuthorizationType
@@ -101,12 +101,17 @@ struct OAuthManager {
 
   private var tokenCredential: TokenCredential?
 
+  init(credential: ConsumerCredential, authorizationType: AuthorizationType) {
+    self.consumerCredential = consumerCredential
+    self.authorizationType = authorizationType
+  }
+
   /**
    请求授权信息以及URL
 
    - parameter completion: 请求成功时，返回封装了OAuth Token的`TokenCredential`以及授权时需要打开的URL
    */
-  mutating func requestAuthorization(completion: Result<(TokenCredential, NSURL), Moya.Error> -> Void) {
+  public mutating func requestAuthorization(completion: Result<(TokenCredential, NSURL), Moya.Error> -> Void) {
     provider.request(.RequestToken(consumerCredential)) { result in
       switch result {
       case .Success(let response):
@@ -143,7 +148,7 @@ struct OAuthManager {
    - parameter completion: 获取Access Token成功时，返回具体的`TokenCredential`
    
    */
-  mutating func requestAccessToken(completion: Result<TokenCredential, Moya.Error> -> Void) {
+  public mutating func requestAccessToken(completion: Result<TokenCredential, Moya.Error> -> Void) {
     guard var credential = tokenCredential else {
       return
     }
