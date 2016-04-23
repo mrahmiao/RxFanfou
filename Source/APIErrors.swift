@@ -9,27 +9,10 @@
 import Foundation
 
 /**
- *  API中会遇到的错误
+ 在API调用过程中会遇到的错误
+
+ - IncorrectQueryString: 传入的Query字符串不符合要求
  */
-public struct APIErrors {
-
-  /**
-   通用错误类型
-
-   - Unknown: 未知错误
-   */
-  public enum Common: ErrorType {
-    case Unknown
-  }
-
-  /**
-   网络请求错误类型
-
-   - Client: 客户端错误，associated value是其响应状态码
-   - Server: 服务端错误，associated value是其响应状态码
-   */
-  public enum Network: ErrorType {
-    case Client(Int)
-    case Server(Int)
-  }
+public enum APIErrors: ErrorType {
+  case IncorrectQueryString(String)
 }
