@@ -7,6 +7,10 @@
 //
 
 import Foundation
+import Log
+
+/// 全局用日志
+let logger = Logger()
 
 public struct APIManager {
 
