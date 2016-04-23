@@ -9,6 +9,8 @@
 import Foundation
 
 extension String {
+
+  /// 解析query字符串中的参数，目前仅支持最简单的foo=bar&hello=world
   public var ffa_queryParamaters: [String: String]? {
     let queries = characters.split("&")
 
