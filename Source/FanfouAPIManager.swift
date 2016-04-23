@@ -7,10 +7,6 @@
 //
 
 import Foundation
-import Log
-
-/// 全局用日志
-let logger = Logger()
 
 /**
  *  FanfouAPI管理器，整个SDK的入口

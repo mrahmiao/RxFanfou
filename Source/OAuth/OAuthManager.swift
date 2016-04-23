@@ -179,7 +179,6 @@ public final class OAuthManager {
         }
 
         guard credential.updateAccessToken(accessTokenQuery: accessTokenQuery) else {
-          logger.error("获取Access Token的Query字符串有误")
           completion(.Failure(.Underlying(APIErrors.IncorrectQueryString(accessTokenQuery))))
           return
         }
