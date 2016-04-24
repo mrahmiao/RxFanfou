@@ -90,6 +90,8 @@ public enum AuthorizationType: String {
   case Desktop = "http://fanfou.com/oauth/authorize?oauth_token=%@&oauth_callback=%@"
 }
 
+typealias TokenCredentialUpdateHandler = (TokenCredential) -> Void
+
 /**
  *  OAuthManager负责处理OAuth相关的请求
  */
@@ -98,6 +100,7 @@ public final class OAuthManager {
   private let consumerCredential: ConsumerCredential
   private let authorizationType: AuthorizationType
   private let service: APIService<API.OAuth>
+  private let tokenCredentialUpdateHandler: TokenCredentialUpdateHandler
 
   private var tokenCredential: TokenCredential? {
     didSet {
@@ -105,9 +108,10 @@ public final class OAuthManager {
     }
   }
 
-  init(credential: ConsumerCredential, authorizationType: AuthorizationType) {
+  init(credential: ConsumerCredential, authorizationType: AuthorizationType, tokenCredentialUpdateHandler: TokenCredentialUpdateHandler) {
     self.consumerCredential = credential
     self.authorizationType = authorizationType
+    self.tokenCredentialUpdateHandler = tokenCredentialUpdateHandler
     self.service = APIService(consumerCredential: credential, tokenCredential: nil)
   }
 
@@ -138,7 +142,7 @@ public final class OAuthManager {
         let URL = NSURL(string: String(format: self.authorizationType.rawValue, credential.oauthToken, self.consumerCredential.callbackURL))!
 
         self.tokenCredential = credential
-
+        self.tokenCredentialUpdateHandler(credential)
         completion(.Success((credential, URL)))
 
       case .Failure(let error):
