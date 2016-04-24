@@ -15,18 +15,21 @@ public final class FanfouAPIManager {
 
   private let consumerCredential: ConsumerCredential
   private let authorizationType: AuthorizationType
-  private var tokenCredential: TokenCredential? {
+  private var credentialObservers: [TokenCredentialObserverType] = []
+
+  /// 授权信息，调用API之前tokenCredential必须不为空，且AccessToken/AccessTokenSecret俱全
+  public var tokenCredential: TokenCredential? {
     didSet {
       // tokenCredential时，通知各个Observer进行更新
       notify(tokenCredential)
     }
   }
-  private var credentialObservers: [TokenCredentialObserverType] = []
 
   /**
    使用`ConsumerCredential`以及`AuthorizationType`来构造一个FanfouAPI管理器
 
    - parameter credential:        饭否第三方应用的Token
+   - parameter tokenCredential:   应用授权信息
    - parameter authorizationType: 授权类型，默认为.Mobile
 
    - returns: 饭否API管理器
