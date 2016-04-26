@@ -141,6 +141,7 @@ public final class OAuthManager {
         completion(.Success(URL))
 
       case .Failure(let error):
+        self.tokenCredential = nil
         completion(.Failure(error))
       }
     }
@@ -183,8 +184,18 @@ public final class OAuthManager {
         completion(.Success(credential))
 
       case .Failure(let error):
+        self.tokenCredential = nil
         completion(.Failure(error))
       }
     }
+  }
+
+   /**
+   重置授权过程
+
+   一般用于已经获取了OAuth Token正要获取Access Token时，或者正在获取Access Token时，遇到了错误后或用户取消了进一步动作后
+   */
+  public func reset() {
+    tokenCredential = nil
   }
 }
