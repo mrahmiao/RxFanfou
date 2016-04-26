@@ -15,7 +15,7 @@ public extension OAuthManager {
 
    - returns: 包含授权信息的TokenCredential对象以及授权URL
    */
-  public func requestAuthorization() -> Observable<(TokenCredential, NSURL)> {
+  public func requestAuthorization() -> Observable<NSURL> {
     return Observable.create { [weak self] observer in
       let cancellableToken = self?.requestAuthorization { result in
         switch result {
