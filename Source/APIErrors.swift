@@ -13,8 +13,10 @@ import Foundation
 
  - IncorrectQueryString: 传入的Query字符串不符合要求
  - CredentialNotExist: 授权信息不存在
+ - UserCancelled: 用户主动取消
  */
 public enum APIErrors: ErrorType {
   case IncorrectQueryString(String)
   case CredentialNotExist
+  case UserCancelled
 }

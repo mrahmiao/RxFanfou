@@ -23,11 +23,11 @@ final class APIService<T: Moya.TargetType> {
 
       /*
        * 设置OAuth Token/Access Token
-       * 如果TokenCredential中存在Access Token，为一般API调用请求
-       * 在发送OAuth的API调用请求时，第一步请求授权URL时没有OAuth Token，第二步请求Access Token时才有
-       * OAuth Token，之后OAuth过程结束，进入一般API调用过程
+       * 1. 在请求授权URL时应为空
+       * 2. 在请求Access Token时应为上一步获得的OAuth Token
+       * 3. 在进行普通API调用时应为Access Token
        */
-      if let token = self.tokenCredential?.accessToken ?? self.tokenCredential?.oauthToken {
+      if let token = self.tokenCredential?.token {
         parameters[APIConstants.oauthToken] = token
       }
 
@@ -44,9 +44,14 @@ final class APIService<T: Moya.TargetType> {
     }, requestClosure: { [unowned self] (endpoint, closure) in
 
       /*
-       * 获取OAuth Token Secret / Access Token Secret以对参数进行签名
+       * 获取OAuth Token Secret / Access Token Secret
+       * 1. 在获取授权URL时，应为空
+       * 2. 在获取Access Token时，应为OAuth Token Secret
+       * 3. 在进行普通API调用时，应为Access Token Secret
        */
-      let tokenSecret = self.tokenCredential?.accessTokenSecret ?? self.tokenCredential?.oauthTokenSecret ?? ""
+      let tokenSecret = self.tokenCredential?.tokenSecret ?? ""
+
+      // 利用Token Secret对参数进行签名
       let targetEndpoint = endpoint.endpointByAddingParameters([
         APIConstants.oauthSignature: endpoint.calculateSignature(
         consumerSecret: self.consumerCredential.secret,

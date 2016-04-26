@@ -32,50 +32,46 @@ public struct TokenCredential {
 
   public static let DefaultTokenIdentifier = "com.ewstudio.RxFanfouAPI.DefaultTokenIdentifier"
 
-  public let identifier: String
+  /// TokenCredential的标识符，在多用户情况下用于区分不同的Token，应该是**唯一**的
+  public var identifier: String
+  public let token: String
+  public let tokenSecret: String
 
-  public let oauthToken: String
-  public let oauthTokenSecret: String
+  /**
+   初始化TokenCredential 对象
 
-  public private(set) var accessToken: String?
-  public private(set) var accessTokenSecret: String?
+   - parameter identifier:  TokenCredential的标识符，在多用户情况下用于区分不同的Token，应该是**唯一**的
+   - parameter token:       OAuth Token／Access Token
+   - parameter tokenSecret: OAuth Token Secret／Access Token Secret
 
-  public init(oauthToken: String, oauthTokenSecret: String, identifier: String = TokenCredential.DefaultTokenIdentifier) {
+   - returns: TokenCredential
+   */
+  public init(identifier: String = TokenCredential.DefaultTokenIdentifier, token: String = "", tokenSecret: String = "") {
     self.identifier = identifier
 
-    self.oauthToken = oauthToken
-    self.oauthTokenSecret = oauthTokenSecret
-    self.accessToken = nil
-    self.accessTokenSecret = nil
+    self.token = token
+    self.tokenSecret = tokenSecret
   }
 
-  init?(query: String, identifier: String = TokenCredential.DefaultTokenIdentifier) {
-    guard let params = query.ffa_queryParamaters else {
-      return nil
-    }
+  /**
+   使用请求OAuth Token／Access Token时返回的query字符串来初始化TokenCredential，格式为
+   *oauth_token=891212-3MdIZyxPeVsFZXFOZj5tAwj6vzJYuLQplzWUmYtWd&oauth_token_secret=x6qpRnlEmW9JbQn4PQVVeVG8ZLPEx6A0TOebgwcuA*
 
-    guard let token = params[APIConstants.oauthToken],
+   - parameter identifier: /// TokenCredential的标识符，在多用户情况下用于区分不同的Token，应该是**唯一**的
+   - parameter query:      请求返回的oauth token／access token字符串
+
+   - returns: 解析了token的TokenCredential
+   */
+  private init?(identifier: String = TokenCredential.DefaultTokenIdentifier, tokenQuery query: String) {
+    guard let params = query.ffa_queryParamaters,
+      token = params[APIConstants.oauthToken],
       secret = params[APIConstants.oauthTokenSecret] else {
         return nil
     }
 
-    self.oauthToken = token
-    self.oauthTokenSecret = secret
-
+    self.token = token
+    self.tokenSecret = secret
     self.identifier = identifier
-  }
-
-  public mutating func updateAccessToken(accessTokenQuery query: String) -> Bool {
-    guard let params = query.ffa_queryParamaters,
-      token = params[APIConstants.oauthToken],
-      secret = params[APIConstants.oauthTokenSecret] else {
-        return false
-    }
-
-    accessToken = token
-    accessTokenSecret = secret
-
-    return true
   }
 }
 
@@ -90,6 +86,8 @@ public enum AuthorizationType: String {
   case Desktop = "http://fanfou.com/oauth/authorize?oauth_token=%@&oauth_callback=%@"
 }
 
+typealias TokenCredentialUpdateHandler = (TokenCredential) -> Void
+
 /**
  *  OAuthManager负责处理OAuth相关的请求
  */
@@ -98,6 +96,7 @@ public final class OAuthManager {
   private let consumerCredential: ConsumerCredential
   private let authorizationType: AuthorizationType
   private let service: APIService<API.OAuth>
+  private let tokenCredentialUpdateHandler: TokenCredentialUpdateHandler
 
   private var tokenCredential: TokenCredential? {
     didSet {
@@ -105,18 +104,19 @@ public final class OAuthManager {
     }
   }
 
-  init(credential: ConsumerCredential, authorizationType: AuthorizationType) {
+  init(credential: ConsumerCredential, authorizationType: AuthorizationType, tokenCredentialUpdateHandler: TokenCredentialUpdateHandler) {
     self.consumerCredential = credential
     self.authorizationType = authorizationType
+    self.tokenCredentialUpdateHandler = tokenCredentialUpdateHandler
     self.service = APIService(consumerCredential: credential, tokenCredential: nil)
   }
 
   /**
    请求授权信息以及URL
 
-   - parameter completion: 请求成功时，返回封装了OAuth Token的`TokenCredential`以及授权时需要打开的URL
+   - parameter completion: 请求成功时，返回授权时需要打开的URL
    */
-  public func requestAuthorization(completion: Result<(TokenCredential, NSURL), Moya.Error> -> Void) -> Cancellable {
+  public func requestAuthorization(completion: Result<NSURL, Moya.Error> -> Void) -> Cancellable {
     return service.provider.request(.RequestToken) { [unowned self] result in
       switch result {
       case .Success(let response):
@@ -130,18 +130,18 @@ public final class OAuthManager {
           return
         }
 
-        guard let credential = TokenCredential(query: query) else {
+        guard let credential = TokenCredential(identifier: TokenCredential.DefaultTokenIdentifier, tokenQuery: query) else {
           completion(.Failure(.Underlying(APIErrors.IncorrectQueryString(query))))
           return
         }
 
-        let URL = NSURL(string: String(format: self.authorizationType.rawValue, credential.oauthToken, self.consumerCredential.callbackURL))!
+        let URL = NSURL(string: String(format: self.authorizationType.rawValue, credential.token, self.consumerCredential.callbackURL))!
 
         self.tokenCredential = credential
-
-        completion(.Success((credential, URL)))
+        completion(.Success(URL))
 
       case .Failure(let error):
+        self.tokenCredential = nil
         completion(.Failure(error))
       }
     }
@@ -161,11 +161,6 @@ public final class OAuthManager {
 
     return service.provider.request(.AccessToken) { [unowned self] result in
 
-      guard var credential = self.tokenCredential else {
-        completion(.Failure(.Underlying(APIErrors.CredentialNotExist)))
-        return
-      }
-
       switch result {
       case .Success(let response):
 
@@ -178,16 +173,29 @@ public final class OAuthManager {
           return
         }
 
-        guard credential.updateAccessToken(accessTokenQuery: accessTokenQuery) else {
+        guard let credential = TokenCredential(identifier: TokenCredential.DefaultTokenIdentifier, tokenQuery:  accessTokenQuery) else {
           completion(.Failure(.Underlying(APIErrors.IncorrectQueryString(accessTokenQuery))))
           return
         }
 
+        self.tokenCredential = credential
+        self.tokenCredentialUpdateHandler(credential)
+
         completion(.Success(credential))
 
       case .Failure(let error):
+        self.tokenCredential = nil
         completion(.Failure(error))
       }
     }
+  }
+
+   /**
+   重置授权过程
+
+   一般用于已经获取了OAuth Token正要获取Access Token时，或者正在获取Access Token时，遇到了错误后或用户取消了进一步动作后
+   */
+  public func reset() {
+    tokenCredential = nil
   }
 }

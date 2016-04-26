@@ -8,12 +8,13 @@
 
 import Foundation
 
-struct APIConstants {
+public struct APIConstants {
   // 请求返回的字符串中相关数据的key值
+  public static let accessToken = "access_token"
+  public static let accessTokenSecret = "access_token_secret"
+
   static let oauthToken = "oauth_token"
   static let oauthTokenSecret = "oauth_token_secret"
-  static let accessToken = "access_token"
-  static let accessTokenSecret = "access_token_secret"
   static let oauthConsumerKey = "oauth_consumer_key"
   static let oauthSignatureMethod = "oauth_signature_method"
   static let oauthSignature = "oauth_signature"
