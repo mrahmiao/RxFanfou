@@ -43,6 +43,8 @@
 		4F7458881CCB7F3700EF6783 /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7458861CCB7F3700EF6783 /* APIConstants.swift */; };
 		4F74588B1CCBAF3700EF6783 /* OAuthManager+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F74588A1CCBAF3700EF6783 /* OAuthManager+Rx.swift */; };
 		4F7458A81CCBB5A200EF6783 /* Moya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7458051CCA481200EF6783 /* Moya.framework */; };
+		4FB2E0C31CCFA300002B4094 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB2E0C21CCFA300002B4094 /* Profile.swift */; };
+		4FB2E0C41CCFA302002B4094 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB2E0C21CCFA300002B4094 /* Profile.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +84,7 @@
 		4F74585F1CCB5DF100EF6783 /* APIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		4F7458861CCB7F3700EF6783 /* APIConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
 		4F74588A1CCBAF3700EF6783 /* OAuthManager+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "OAuthManager+Rx.swift"; sourceTree = "<group>"; };
+		4FB2E0C21CCFA300002B4094 /* Profile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +153,7 @@
 				4F7458891CCBAE7300EF6783 /* RxSwift */,
 				4F74583C1CCB54C100EF6783 /* Protocols */,
 				4F74581C1CCB0FC800EF6783 /* Extensions */,
+				4FB2E0C11CCF99FB002B4094 /* Account */,
 				4F74580A1CCA4CD900EF6783 /* OAuth */,
 				4F7458071CCA49D200EF6783 /* APIErrors.swift */,
 				4F7458141CCA530200EF6783 /* FanfouAPIManager.swift */,
@@ -225,6 +229,14 @@
 				4F74588A1CCBAF3700EF6783 /* OAuthManager+Rx.swift */,
 			);
 			path = RxSwift;
+			sourceTree = "<group>";
+		};
+		4FB2E0C11CCF99FB002B4094 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				4FB2E0C21CCFA300002B4094 /* Profile.swift */,
+			);
+			path = Account;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -381,6 +393,7 @@
 				4F7458151CCA530200EF6783 /* FanfouAPIManager.swift in Sources */,
 				4F7458871CCB7F3700EF6783 /* APIConstants.swift in Sources */,
 				4F7458081CCA49D200EF6783 /* APIErrors.swift in Sources */,
+				4FB2E0C31CCFA300002B4094 /* Profile.swift in Sources */,
 				4F74583E1CCB54F000EF6783 /* ParameterSignable.swift in Sources */,
 				4F74580C1CCA4D0500EF6783 /* OAuthManager.swift in Sources */,
 			);
@@ -399,6 +412,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4F74583B1CCB548500EF6783 /* Dictionary+Utilities.swift in Sources */,
+				4FB2E0C41CCFA302002B4094 /* Profile.swift in Sources */,
 				4F74581F1CCB100D00EF6783 /* String+Utilities.swift in Sources */,
 				4F7458611CCB62C400EF6783 /* APIService.swift in Sources */,
 				4F7458191CCA53B100EF6783 /* OAuthAPI.swift in Sources */,
