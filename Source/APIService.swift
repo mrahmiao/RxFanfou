@@ -8,6 +8,7 @@
 
 import Foundation
 import CryptoSwift
+import Gloss
 import Moya
 
 final class APIService<T: Moya.TargetType> {
@@ -41,25 +42,25 @@ final class APIService<T: Moya.TargetType> {
       let url = target.baseURL.URLByAppendingPathComponent(target.path).absoluteString
 
       return Endpoint(URL: url, sampleResponseClosure: {.NetworkResponse(200, target.sampleData)}, method: target.method, parameters: parameters)
-    }, requestClosure: { [unowned self] (endpoint, closure) in
+      }, requestClosure: { [unowned self] (endpoint, closure) in
 
-      /*
-       * 获取OAuth Token Secret / Access Token Secret
-       * 1. 在获取授权URL时，应为空
-       * 2. 在获取Access Token时，应为OAuth Token Secret
-       * 3. 在进行普通API调用时，应为Access Token Secret
-       */
-      let tokenSecret = self.tokenCredential?.tokenSecret ?? ""
+        /*
+         * 获取OAuth Token Secret / Access Token Secret
+         * 1. 在获取授权URL时，应为空
+         * 2. 在获取Access Token时，应为OAuth Token Secret
+         * 3. 在进行普通API调用时，应为Access Token Secret
+         */
+        let tokenSecret = self.tokenCredential?.tokenSecret ?? ""
 
-      // 利用Token Secret对参数进行签名
-      let targetEndpoint = endpoint.endpointByAddingParameters([
-        APIConstants.oauthSignature: endpoint.calculateSignature(
-        consumerSecret: self.consumerCredential.secret,
-        tokenSecret: tokenSecret)
-      ])
+        // 利用Token Secret对参数进行签名
+        let targetEndpoint = endpoint.endpointByAddingParameters([
+          APIConstants.oauthSignature: endpoint.calculateSignature(
+            consumerSecret: self.consumerCredential.secret,
+            tokenSecret: tokenSecret)
+          ])
 
-      closure(targetEndpoint.urlRequest)
-    })
+        closure(targetEndpoint.urlRequest)
+      })
   }()
 
   init(consumerCredential: ConsumerCredential, tokenCredential: TokenCredential?) {
@@ -79,5 +80,37 @@ extension Moya.Endpoint: ParameterSignable {
 
   var requestParameters: [String: AnyObject]? {
     return parameters
+  }
+}
+
+extension Moya.TargetType {
+
+  var parameters: [String: AnyObject]? {
+    return [:]
+  }
+
+  var sampleData: NSData {
+    return NSData()
+  }
+
+  func JSON(path: String) -> String {
+    return "\(path).json"
+  }
+}
+
+extension Moya.Response {
+  func mapSuccessfulHTTPObject<T: Decodable>(type: T.Type) throws -> T {
+
+    let res = try filterStatusCode(200)
+
+    guard let JSON = try NSJSONSerialization.JSONObjectWithData(res.data, options: .AllowFragments) as? [String: AnyObject] else {
+      throw Moya.Error.JSONMapping(res)
+    }
+
+    guard let instance = type.init(json: JSON) else {
+      throw Moya.Error.Data(res)
+    }
+
+    return instance
   }
 }
