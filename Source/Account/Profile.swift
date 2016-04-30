@@ -42,8 +42,14 @@ public struct Profile: Decodable {
   /// 用户关注数
   public let followingCount: Int
 
+  /// 收藏消息数
+  public let favoritesCount: Int
+
   /// 消息数量
   public let statusCount: Int
+
+  /// 照片数量
+  public let photoCount: Int
 
   /// 是否正在关注当前用户
   public let following: Bool
@@ -68,7 +74,9 @@ public struct Profile: Decodable {
     self.protected = ("protected" <~~ json) ?? false
     self.followingCount = ("friends_count" <~~ json) ?? -1
     self.followerCount = ("followers_count" <~~ json) ?? -1
+    self.favoritesCount = ("favourites_count" <~~ json) ?? -1
     self.statusCount = ("statuses_count" <~~ json) ?? -1
+    self.photoCount = ("photo_count" <~~ json) ?? -1
     self.following = ("following" <~~ json) ?? false
     self.createdAt = ("created_at" <~~ json) ?? ""
     self.utcOffset = ("utc_offset" <~~ json) ?? -1
@@ -90,7 +98,9 @@ extension Profile: CustomStringConvertible, CustomDebugStringConvertible {
       "protected: \(protected)",
       "followerCount: \(followerCount)",
       "followingCount: \(followingCount)",
-      "statusCound: \(statusCount)",
+      "favoritesCount: \(favoritesCount)",
+      "statusCount: \(statusCount)",
+      "photoCount: \(photoCount)",
       "following: \(following)",
       "createdAt: \(createdAt)",
       "utcOffset: \(utcOffset)",
