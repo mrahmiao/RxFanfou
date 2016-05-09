@@ -67,7 +67,7 @@ public struct Profile: Decodable {
   public let utcOffset: Int
 
   /// 背景图片地址
-  public let backgroundImageURL: String
+  public let backgroundImageURLString: String
 
   public init?(json: JSON) {
     self.id = ("id" <~~ json) ?? ""
@@ -88,7 +88,7 @@ public struct Profile: Decodable {
     self.following = ("following" <~~ json) ?? false
     self.createdAt = ("created_at" <~~ json) ?? ""
     self.utcOffset = ("utc_offset" <~~ json) ?? -1
-    self.backgroundImageURL = ("profile_background_image_url" <~~ json) ?? ""
+    self.backgroundImageURLString = ("profile_background_image_url" <~~ json) ?? ""
   }
 }
 
@@ -114,7 +114,7 @@ extension Profile: CustomStringConvertible, CustomDebugStringConvertible {
       "following: \(following)",
       "createdAt: \(createdAt)",
       "utcOffset: \(utcOffset)",
-      "backgroundImageURLString: \(backgroundImageURL)"
+      "backgroundImageURLString: \(backgroundImageURLString)"
       ].joinWithSeparator("\n")
   }
 
