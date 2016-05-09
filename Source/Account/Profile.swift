@@ -33,6 +33,9 @@ public struct Profile: Decodable {
   /// 用户头像地址
   public let avatarImageURLString: String
 
+  /// 用户页面地址
+  public let URLString: String
+
   /// 用户是否设置隐私保护
   public let protected: Bool
 
@@ -71,6 +74,7 @@ public struct Profile: Decodable {
     self.birthday = ("birthday" <~~ json) ?? ""
     self.desc = ("description" <~~ json) ?? ""
     self.avatarImageURLString = ("profile_image_url" <~~ json) ?? ""
+    self.URLString = ("url" <~~ json) ?? ""
     self.protected = ("protected" <~~ json) ?? false
     self.followingCount = ("friends_count" <~~ json) ?? -1
     self.followerCount = ("followers_count" <~~ json) ?? -1
@@ -95,6 +99,7 @@ extension Profile: CustomStringConvertible, CustomDebugStringConvertible {
       "birthday: \(birthday)",
       "description: \(desc)",
       "avatarURL: \(avatarImageURLString)",
+      "URL: \(URLString)",
       "protected: \(protected)",
       "followerCount: \(followerCount)",
       "followingCount: \(followingCount)",
