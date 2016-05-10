@@ -57,8 +57,8 @@ public struct Profile: Decodable {
   /// 照片数量
   public let photoCount: Int
 
-  /// 是否正在关注当前用户
-  public let following: Bool
+  /// 是否被当前登录用户所关注
+  public let beingFollowed: Bool
 
   /// 加入饭否的时间
   public let createdAt: String
@@ -85,7 +85,7 @@ public struct Profile: Decodable {
     self.favoritesCount = ("favourites_count" <~~ json) ?? -1
     self.statusCount = ("statuses_count" <~~ json) ?? -1
     self.photoCount = ("photo_count" <~~ json) ?? -1
-    self.following = ("following" <~~ json) ?? false
+    self.beingFollowed = ("following" <~~ json) ?? false
     self.createdAt = ("created_at" <~~ json) ?? ""
     self.utcOffset = ("utc_offset" <~~ json) ?? -1
     self.backgroundImageURLString = ("profile_background_image_url" <~~ json) ?? ""
@@ -111,7 +111,7 @@ extension Profile: CustomStringConvertible, CustomDebugStringConvertible {
       "favoritesCount: \(favoritesCount)",
       "statusCount: \(statusCount)",
       "photoCount: \(photoCount)",
-      "following: \(following)",
+      "beingFollowed: \(beingFollowed)",
       "createdAt: \(createdAt)",
       "utcOffset: \(utcOffset)",
       "backgroundImageURLString: \(backgroundImageURLString)"
