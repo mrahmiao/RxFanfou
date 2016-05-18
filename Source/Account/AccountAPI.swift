@@ -13,6 +13,7 @@ extension API {
   enum Account: Moya.TargetType {
 
     case VerifyCredentials
+    case Notification
 
     var baseURL: NSURL {
       return NSURL(string: "http://api.fanfou.com/account/")!
@@ -21,6 +22,7 @@ extension API {
     var path: String {
       switch self {
       case .VerifyCredentials: return JSON("verify_credentials")
+      case .Notification: return JSON("notification")
       }
     }
 
