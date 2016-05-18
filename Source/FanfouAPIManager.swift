@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Result
+import Moya
 
 /**
  *  FanfouAPI管理器，整个SDK的入口
@@ -95,6 +97,25 @@ extension APIManagerType where Self: TokenCredentialObserverType {
   init(consumerCredential: ConsumerCredential, tokenCredential: TokenCredential, tokenCredentialObservable: TokenCredentialObservable) {
     self.init(consumerCredential: consumerCredential, tokenCredential: tokenCredential)
     tokenCredentialObservable.addCredentialObserver(self)
+  }
+}
+
+extension APIManagerType {
+  func reformJSON<T>(reformer: [String: AnyObject] -> T?, _ completion: Result<T, Error> -> Void) -> Result<Response, Error> -> Void {
+  return { result in
+      switch result {
+      case .Success(let response):
+        do {
+          let object = try response.reformSuccessfulHTTPResponse(reformer)
+          completion(.Success(object))
+        } catch {
+          completion(.Failure(.Underlying(error)))
+        }
+
+      case .Failure(let e):
+        completion(.Failure(.Underlying(e)))
+      }
+    }
   }
 }
 
