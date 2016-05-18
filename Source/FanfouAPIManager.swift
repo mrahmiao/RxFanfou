@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Result
+import Moya
 
 /**
  *  FanfouAPI管理器，整个SDK的入口
@@ -15,10 +17,10 @@ public final class FanfouAPIManager {
 
   private let consumerCredential: ConsumerCredential
   private let authorizationType: AuthorizationType
-  private var credentialObservers: [TokenCredentialObserverType] = []
+  var credentialObservers: [TokenCredentialObserverType] = []
 
   /// 授权信息，调用API之前tokenCredential必须不为空，且AccessToken/AccessTokenSecret俱全
-  public var tokenCredential: TokenCredential? {
+  public var tokenCredential: TokenCredential {
     didSet {
       // tokenCredential时，通知各个Observer进行更新
       notify(tokenCredential)
@@ -36,7 +38,7 @@ public final class FanfouAPIManager {
    */
   public init(credential: ConsumerCredential, tokenCredential: TokenCredential? = nil, authorizationType: AuthorizationType = .Mobile) {
     self.consumerCredential = credential
-    self.tokenCredential = tokenCredential
+    self.tokenCredential = tokenCredential ?? TokenCredential(identifier: TokenCredential.DefaultTokenIdentifier)
     self.authorizationType = authorizationType
   }
 
@@ -48,12 +50,18 @@ public final class FanfouAPIManager {
         self?.tokenCredential = credential
       })
   }()
+
+  /// 调用Account相关API
+  public private(set) lazy var Account: AccountManager = {
+    return AccountManager(consumerCredential: self.consumerCredential,
+                          tokenCredential: self.tokenCredential)
+  }()
 }
 
 /**
  *  实现该协议以添加TokenCredential的Observer
  */
-private protocol TokenCredentialObservable {
+protocol TokenCredentialObservable {
   var credentialObservers: [TokenCredentialObserverType] { get set }
   func addCredentialObserver(observer: TokenCredentialObserverType)
   func notify(tokenCredential: TokenCredential?)
@@ -76,6 +84,39 @@ extension FanfouAPIManager: TokenCredentialObservable {
  */
 protocol TokenCredentialObserverType {
   func updateCredential(credential: TokenCredential?)
+}
+
+// MARK: - APIManagerType
+protocol APIManagerType {
+  var consumerCredential: ConsumerCredential { get set }
+  var tokenCredential: TokenCredential { get set }
+  init(consumerCredential: ConsumerCredential, tokenCredential: TokenCredential)
+}
+
+extension APIManagerType where Self: TokenCredentialObserverType {
+  init(consumerCredential: ConsumerCredential, tokenCredential: TokenCredential, tokenCredentialObservable: TokenCredentialObservable) {
+    self.init(consumerCredential: consumerCredential, tokenCredential: tokenCredential)
+    tokenCredentialObservable.addCredentialObserver(self)
+  }
+}
+
+extension APIManagerType {
+  func reformJSON<T>(reformer: [String: AnyObject] -> T?, _ completion: Result<T, Error> -> Void) -> Result<Response, Error> -> Void {
+  return { result in
+      switch result {
+      case .Success(let response):
+        do {
+          let object = try response.reformSuccessfulHTTPResponse(reformer)
+          completion(.Success(object))
+        } catch {
+          completion(.Failure(.Underlying(error)))
+        }
+
+      case .Failure(let e):
+        completion(.Failure(.Underlying(e)))
+      }
+    }
+  }
 }
 
 /**
