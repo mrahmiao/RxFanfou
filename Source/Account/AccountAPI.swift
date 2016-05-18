@@ -14,6 +14,7 @@ extension API {
 
     case VerifyCredentials
     case Notification
+    case UpdateProfile(AccountManager.TargetProfile?)
 
     var baseURL: NSURL {
       return NSURL(string: "http://api.fanfou.com/account/")!
@@ -23,11 +24,25 @@ extension API {
       switch self {
       case .VerifyCredentials: return JSON("verify_credentials")
       case .Notification: return JSON("notification")
+      case .UpdateProfile(_): return JSON("update_profile")
       }
     }
 
     var method: Moya.Method {
       return .POST
+    }
+
+    var parameters: [String : AnyObject]? {
+      switch self {
+      case .UpdateProfile(let profile):
+        guard let profile = profile else {
+          return nil
+        }
+
+        return profile.serialize()
+      default:
+        return nil
+      }
     }
   }
 }

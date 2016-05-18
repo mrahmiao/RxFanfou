@@ -12,6 +12,28 @@ import Result
 
 public final class AccountManager: APIManagerType {
 
+  public struct TargetProfile: Serializable {
+    public var URLString: String?
+    public var location: String?
+    public var description: String?
+    public var name: String?
+    public var email: String?
+
+    public init() { }
+
+    func serialize() -> [String: AnyObject] {
+      var result: [String: AnyObject] = [:]
+
+      result["url"] = URLString
+      result["location"] = location
+      result["description"] = description
+      result["name"] = name
+      result["email"] = email
+
+      return result
+    }
+  }
+
   var consumerCredential: ConsumerCredential
   var tokenCredential: TokenCredential
   let service: APIService<API.Account>
