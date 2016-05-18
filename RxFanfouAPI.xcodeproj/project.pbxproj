@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F11651F1CE4BE1500B60404 /* FollowingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F11651E1CE4BE1500B60404 /* FollowingStatus.swift */; };
+		4F1165201CE4BE1600B60404 /* FollowingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F11651E1CE4BE1500B60404 /* FollowingStatus.swift */; };
 		4F7457D51CCA1D6500EF6783 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7457D41CCA1D6500EF6783 /* Tests.swift */; };
 		4F7457D71CCA1D6500EF6783 /* RxFanfouAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7457C31CCA1CE700EF6783 /* RxFanfouAPI.framework */; };
 		4F7457E41CCA1E4700EF6783 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7457DE1CCA1E4600EF6783 /* Alamofire.framework */; };
@@ -63,6 +65,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4F11651E1CE4BE1500B60404 /* FollowingStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingStatus.swift; sourceTree = "<group>"; };
 		4F7457C31CCA1CE700EF6783 /* RxFanfouAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxFanfouAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F7457D21CCA1D6500EF6783 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F7457D41CCA1D6500EF6783 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
@@ -134,6 +137,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F11651D1CE4BDE400B60404 /* Friendship */ = {
+			isa = PBXGroup;
+			children = (
+				4F11651E1CE4BE1500B60404 /* FollowingStatus.swift */,
+			);
+			path = Friendship;
+			sourceTree = "<group>";
+		};
 		4F7457B91CCA1CE700EF6783 = {
 			isa = PBXGroup;
 			children = (
@@ -162,6 +173,7 @@
 				4F74583C1CCB54C100EF6783 /* Protocols */,
 				4F74581C1CCB0FC800EF6783 /* Extensions */,
 				4FB2E0C11CCF99FB002B4094 /* Account */,
+				4F11651D1CE4BDE400B60404 /* Friendship */,
 				4F74580A1CCA4CD900EF6783 /* OAuth */,
 				4F7458071CCA49D200EF6783 /* APIErrors.swift */,
 				4F7458141CCA530200EF6783 /* FanfouAPIManager.swift */,
@@ -400,6 +412,7 @@
 				4F74581E1CCB100D00EF6783 /* String+Utilities.swift in Sources */,
 				4F7458601CCB5DF100EF6783 /* APIService.swift in Sources */,
 				4FB2E0CD1CCFAE70002B4094 /* AccountManager+Rx.swift in Sources */,
+				4F11651F1CE4BE1500B60404 /* FollowingStatus.swift in Sources */,
 				4F74588B1CCBAF3700EF6783 /* OAuthManager+Rx.swift in Sources */,
 				4FB2E0CA1CCFA798002B4094 /* AccountAPI.swift in Sources */,
 				4F7458181CCA53B100EF6783 /* OAuthAPI.swift in Sources */,
@@ -433,6 +446,7 @@
 				4F7458191CCA53B100EF6783 /* OAuthAPI.swift in Sources */,
 				4FB2E0CB1CCFA798002B4094 /* AccountAPI.swift in Sources */,
 				4F7458161CCA530200EF6783 /* FanfouAPIManager.swift in Sources */,
+				4F1165201CE4BE1600B60404 /* FollowingStatus.swift in Sources */,
 				4F7458881CCB7F3700EF6783 /* APIConstants.swift in Sources */,
 				4F7458091CCA49D200EF6783 /* APIErrors.swift in Sources */,
 				4F74583F1CCB550400EF6783 /* ParameterSignable.swift in Sources */,
