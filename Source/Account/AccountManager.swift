@@ -39,4 +39,8 @@ public final class AccountManager: APIManagerType {
     }
   }
 
+  public func getNotifications<T>(reformer: [String: AnyObject] -> T?, completion: Result<T, Moya.Error> -> Void) -> Cancellable {
+    return service.provider.request(.Notification, completion: reformJSON(reformer, completion))
+  }
+
 }
