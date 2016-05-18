@@ -123,3 +123,11 @@ extension Profile: CustomStringConvertible, CustomDebugStringConvertible {
     return description
   }
 }
+
+extension Profile: Equatable { }
+
+public func ==(lhs: Profile, rhs: Profile) -> Bool {
+
+  // 从实际情况来说，因为ID是唯一的，所以ID相同，Profile即相同
+  return lhs.id == rhs.id
+}
