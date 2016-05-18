@@ -12,6 +12,8 @@
 		4F5907311CEC574C009CD9BE /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5907301CEC574C009CD9BE /* Serializable.swift */; };
 		4F5907321CEC5782009CD9BE /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5907301CEC574C009CD9BE /* Serializable.swift */; };
 		4F5907341CEC5EE0009CD9BE /* Utilites+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5907331CEC5EE0009CD9BE /* Utilites+Rx.swift */; };
+		4F5907361CEC6AED009CD9BE /* FriendshipAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5907351CEC6AED009CD9BE /* FriendshipAPI.swift */; };
+		4F5907371CEC6AED009CD9BE /* FriendshipAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5907351CEC6AED009CD9BE /* FriendshipAPI.swift */; };
 		4F7457D51CCA1D6500EF6783 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7457D41CCA1D6500EF6783 /* Tests.swift */; };
 		4F7457D71CCA1D6500EF6783 /* RxFanfouAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7457C31CCA1CE700EF6783 /* RxFanfouAPI.framework */; };
 		4F7457E41CCA1E4700EF6783 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7457DE1CCA1E4600EF6783 /* Alamofire.framework */; };
@@ -71,6 +73,7 @@
 		4F11651E1CE4BE1500B60404 /* FollowingStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingStatus.swift; sourceTree = "<group>"; };
 		4F5907301CEC574C009CD9BE /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
 		4F5907331CEC5EE0009CD9BE /* Utilites+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Utilites+Rx.swift"; sourceTree = "<group>"; };
+		4F5907351CEC6AED009CD9BE /* FriendshipAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendshipAPI.swift; sourceTree = "<group>"; };
 		4F7457C31CCA1CE700EF6783 /* RxFanfouAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxFanfouAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F7457D21CCA1D6500EF6783 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F7457D41CCA1D6500EF6783 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
@@ -146,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				4F11651E1CE4BE1500B60404 /* FollowingStatus.swift */,
+				4F5907351CEC6AED009CD9BE /* FriendshipAPI.swift */,
 			);
 			path = Friendship;
 			sourceTree = "<group>";
@@ -417,6 +421,7 @@
 			files = (
 				4F74583A1CCB538600EF6783 /* Dictionary+Utilities.swift in Sources */,
 				4F74581E1CCB100D00EF6783 /* String+Utilities.swift in Sources */,
+				4F5907361CEC6AED009CD9BE /* FriendshipAPI.swift in Sources */,
 				4F7458601CCB5DF100EF6783 /* APIService.swift in Sources */,
 				4FB2E0CD1CCFAE70002B4094 /* AccountManager+Rx.swift in Sources */,
 				4F5907311CEC574C009CD9BE /* Serializable.swift in Sources */,
@@ -452,6 +457,7 @@
 				4FB2E0C81CCFA415002B4094 /* AccountManager.swift in Sources */,
 				4FB2E0C41CCFA302002B4094 /* Profile.swift in Sources */,
 				4F74581F1CCB100D00EF6783 /* String+Utilities.swift in Sources */,
+				4F5907371CEC6AED009CD9BE /* FriendshipAPI.swift in Sources */,
 				4F7458611CCB62C400EF6783 /* APIService.swift in Sources */,
 				4F7458191CCA53B100EF6783 /* OAuthAPI.swift in Sources */,
 				4FB2E0CB1CCFA798002B4094 /* AccountAPI.swift in Sources */,
