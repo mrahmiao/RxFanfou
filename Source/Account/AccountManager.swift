@@ -65,6 +65,10 @@ public final class AccountManager: APIManagerType {
     return service.provider.request(.Notification, completion: reformJSON(reformer, completion))
   }
 
+  public func updateProfile<T>(profile: TargetProfile, reformer: [String: AnyObject] -> T?, completion: Result<T, Moya.Error> -> Void) -> Cancellable {
+    return service.provider.request(.UpdateProfile(profile), completion: reformJSON(reformer, completion))
+  }
+
   public func updateProfileImage<T>(imageData data: NSData, reformer: [String: AnyObject] -> T?, completion: Result<T, Moya.Error> -> Void) -> Cancellable {
     return service.provider.request(.UpdateProfileImage(data), completion: reformJSON(reformer, completion))
   }
