@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4F11651F1CE4BE1500B60404 /* FollowingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F11651E1CE4BE1500B60404 /* FollowingStatus.swift */; };
 		4F1165201CE4BE1600B60404 /* FollowingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F11651E1CE4BE1500B60404 /* FollowingStatus.swift */; };
+		4F5907311CEC574C009CD9BE /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5907301CEC574C009CD9BE /* Serializable.swift */; };
+		4F5907321CEC5782009CD9BE /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5907301CEC574C009CD9BE /* Serializable.swift */; };
 		4F7457D51CCA1D6500EF6783 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F7457D41CCA1D6500EF6783 /* Tests.swift */; };
 		4F7457D71CCA1D6500EF6783 /* RxFanfouAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7457C31CCA1CE700EF6783 /* RxFanfouAPI.framework */; };
 		4F7457E41CCA1E4700EF6783 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F7457DE1CCA1E4600EF6783 /* Alamofire.framework */; };
@@ -66,6 +68,7 @@
 
 /* Begin PBXFileReference section */
 		4F11651E1CE4BE1500B60404 /* FollowingStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingStatus.swift; sourceTree = "<group>"; };
+		4F5907301CEC574C009CD9BE /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
 		4F7457C31CCA1CE700EF6783 /* RxFanfouAPI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RxFanfouAPI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F7457D21CCA1D6500EF6783 /* Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F7457D41CCA1D6500EF6783 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
@@ -239,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				4F74583D1CCB54F000EF6783 /* ParameterSignable.swift */,
+				4F5907301CEC574C009CD9BE /* Serializable.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -412,6 +416,7 @@
 				4F74581E1CCB100D00EF6783 /* String+Utilities.swift in Sources */,
 				4F7458601CCB5DF100EF6783 /* APIService.swift in Sources */,
 				4FB2E0CD1CCFAE70002B4094 /* AccountManager+Rx.swift in Sources */,
+				4F5907311CEC574C009CD9BE /* Serializable.swift in Sources */,
 				4F11651F1CE4BE1500B60404 /* FollowingStatus.swift in Sources */,
 				4F74588B1CCBAF3700EF6783 /* OAuthManager+Rx.swift in Sources */,
 				4FB2E0CA1CCFA798002B4094 /* AccountAPI.swift in Sources */,
@@ -438,6 +443,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F5907321CEC5782009CD9BE /* Serializable.swift in Sources */,
 				4F74583B1CCB548500EF6783 /* Dictionary+Utilities.swift in Sources */,
 				4FB2E0C81CCFA415002B4094 /* AccountManager.swift in Sources */,
 				4FB2E0C41CCFA302002B4094 /* Profile.swift in Sources */,
