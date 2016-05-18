@@ -15,6 +15,7 @@ extension API {
     case VerifyCredentials
     case Notification
     case UpdateProfile(AccountManager.TargetProfile?)
+    case UpdateProfileImage(NSData)
 
     var baseURL: NSURL {
       return NSURL(string: "http://api.fanfou.com/account/")!
@@ -25,6 +26,7 @@ extension API {
       case .VerifyCredentials: return JSON("verify_credentials")
       case .Notification: return JSON("notification")
       case .UpdateProfile(_): return JSON("update_profile")
+      case .UpdateProfileImage(_): return JSON("update_profile_image")
       }
     }
 
@@ -40,6 +42,8 @@ extension API {
         }
 
         return profile.serialize()
+      case .UpdateProfileImage(let imageData):
+        return ["image": imageData]
       default:
         return nil
       }
