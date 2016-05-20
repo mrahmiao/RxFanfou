@@ -54,13 +54,13 @@ public final class FanfouAPIManager {
   /// 调用Account相关API
   public private(set) lazy var Account: AccountManager = {
     return AccountManager(consumerCredential: self.consumerCredential,
-                          tokenCredential: self.tokenCredential)
+                          tokenCredential: self.tokenCredential, tokenCredentialObservable: self)
   }()
 
   /// 调用Friendship相关API
   public private(set) lazy var Friendship: FriendshipManager = {
     return FriendshipManager(consumerCredential: self.consumerCredential,
-                             tokenCredential: self.tokenCredential)
+                             tokenCredential: self.tokenCredential, tokenCredentialObservable: self)
   }()
 }
 
@@ -70,7 +70,7 @@ public final class FanfouAPIManager {
 protocol TokenCredentialObservable {
   var credentialObservers: [TokenCredentialObserverType] { get set }
   func addCredentialObserver(observer: TokenCredentialObserverType)
-  func notify(tokenCredential: TokenCredential?)
+  func notify(tokenCredential: TokenCredential)
 }
 
 extension FanfouAPIManager: TokenCredentialObservable {
@@ -78,8 +78,9 @@ extension FanfouAPIManager: TokenCredentialObservable {
     credentialObservers.append(observer)
   }
 
-  func notify(tokenCredential: TokenCredential?) {
+  func notify(tokenCredential: TokenCredential) {
     for observer in credentialObservers {
+      var observer = observer
       observer.updateCredential(tokenCredential)
     }
   }
@@ -89,7 +90,15 @@ extension FanfouAPIManager: TokenCredentialObservable {
  *  各个API Manager实现该协议，并添加自己为Observer，在TokenCredential更新时获得通知
  */
 protocol TokenCredentialObserverType {
-  func updateCredential(credential: TokenCredential?)
+  mutating func updateCredential(credential: TokenCredential?)
+}
+
+extension TokenCredentialObserverType where Self: APIManagerType {
+  mutating func updateCredential(credential: TokenCredential?) {
+    if let c = credential {
+      self.tokenCredential = c
+    }
+  }
 }
 
 // MARK: - APIManagerType
@@ -105,6 +114,7 @@ extension APIManagerType where Self: TokenCredentialObserverType {
     tokenCredentialObservable.addCredentialObserver(self)
   }
 }
+
 
 extension APIManagerType {
   func reformJSON<T>(reformer: [String: AnyObject] -> T?, _ completion: Result<T, Error> -> Void) -> Result<Response, Error> -> Void {

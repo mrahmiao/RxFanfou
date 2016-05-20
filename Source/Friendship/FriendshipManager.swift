@@ -45,6 +45,8 @@ public final class FriendshipManager: APIManagerType {
   }
 }
 
+extension FriendshipManager: TokenCredentialObserverType { }
+
 private extension FriendshipManager {
   func handleFriendshipResponse(response: Moya.Response, source: String, target: String, completion: Result<FollowingStatus, Error> -> Void) {
     let sourceInfo: [String: AnyObject]

@@ -74,3 +74,5 @@ public final class AccountManager: APIManagerType {
   }
 
 }
+
+extension AccountManager: TokenCredentialObserverType { }
