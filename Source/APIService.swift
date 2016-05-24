@@ -114,10 +114,10 @@ extension Moya.Response {
     return instance
   }
 
-  func reformSuccessfulHTTPResponse<T>(reformer: [String: AnyObject] -> T?) throws -> T {
+  func reformSuccessfulHTTPResponse<T, JSONType>(reformer: JSONType -> T?) throws -> T {
     let res = try filterStatusCode(200)
 
-    guard let JSON = try NSJSONSerialization.JSONObjectWithData(res.data, options: .AllowFragments) as? [String: AnyObject] else {
+    guard let JSON = try NSJSONSerialization.JSONObjectWithData(res.data, options: .AllowFragments) as? JSONType else {
       throw Moya.Error.JSONMapping(res)
     }
 

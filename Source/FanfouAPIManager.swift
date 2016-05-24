@@ -117,7 +117,7 @@ extension APIManagerType where Self: TokenCredentialObserverType {
 
 
 extension APIManagerType {
-  func reformJSON<T>(reformer: [String: AnyObject] -> T?, _ completion: Result<T, Error> -> Void) -> Result<Response, Error> -> Void {
+  func reformJSON<T, JSONType>(reformer: JSONType -> T?, _ completion: Result<T, Error> -> Void) -> Result<Response, Error> -> Void {
   return { result in
       switch result {
       case .Success(let response):
@@ -149,5 +149,7 @@ struct API {
     if let page = page {
       result["page"] = page
     }
+
+    return result
   }
 }
