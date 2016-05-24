@@ -138,4 +138,16 @@ extension APIManagerType {
 /**
  *  Fanfou API的命名空间
  */
-struct API { }
+struct API {
+  static func parameters(withCount count: Int?, page: Int?) -> [String: AnyObject] {
+    var result: [String: AnyObject] = [:]
+
+    if let count = count where count >= 1 && count <= 60 {
+      result["count"] = count
+    }
+
+    if let page = page {
+      result["page"] = page
+    }
+  }
+}
