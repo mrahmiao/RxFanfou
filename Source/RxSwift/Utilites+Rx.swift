@@ -27,3 +27,13 @@ func onCompletion<T>(observer: AnyObserver<T>) -> Result<T, Error> -> Void {
     }
   }
 }
+
+func createObservable<T>(block: AnyObserver<T> -> Cancellable?) -> Observable<T> {
+  return Observable.create { observer in
+    let cancellableToken = block(observer)
+
+    return AnonymousDisposable {
+      cancellableToken?.cancel()
+    }
+  }
+}
