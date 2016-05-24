@@ -65,3 +65,5 @@ public final class UserManager: APIManagerType {
     return service.provider.request(.Show(userID), completion: reformJSON(reformer, completion))
   }
 }
+
+extension UserManager: TokenCredentialObserverType { }

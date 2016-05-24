@@ -62,6 +62,12 @@ public final class FanfouAPIManager {
     return FriendshipManager(consumerCredential: self.consumerCredential,
                              tokenCredential: self.tokenCredential, tokenCredentialObservable: self)
   }()
+
+  /// 调用User相关API
+  public private(set) lazy var User: UserManager = {
+    return UserManager(consumerCredential: self.consumerCredential,
+                             tokenCredential: self.tokenCredential, tokenCredentialObservable: self)
+  }()
 }
 
 /**
