@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4F08B5CB1CF3E5AA00CBD871 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F08B5CA1CF3E5AA00CBD871 /* UserAPI.swift */; };
 		4F08B5CC1CF3E5AA00CBD871 /* UserAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F08B5CA1CF3E5AA00CBD871 /* UserAPI.swift */; };
+		4F08B5CE1CF3FE8E00CBD871 /* UsreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F08B5CD1CF3FE8E00CBD871 /* UsreManager.swift */; };
+		4F08B5CF1CF3FE8F00CBD871 /* UsreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F08B5CD1CF3FE8E00CBD871 /* UsreManager.swift */; };
 		4F11651F1CE4BE1500B60404 /* FollowingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F11651E1CE4BE1500B60404 /* FollowingStatus.swift */; };
 		4F1165201CE4BE1600B60404 /* FollowingStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F11651E1CE4BE1500B60404 /* FollowingStatus.swift */; };
 		4F5907311CEC574C009CD9BE /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F5907301CEC574C009CD9BE /* Serializable.swift */; };
@@ -76,6 +78,7 @@
 
 /* Begin PBXFileReference section */
 		4F08B5CA1CF3E5AA00CBD871 /* UserAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserAPI.swift; sourceTree = "<group>"; };
+		4F08B5CD1CF3FE8E00CBD871 /* UsreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsreManager.swift; sourceTree = "<group>"; };
 		4F11651E1CE4BE1500B60404 /* FollowingStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingStatus.swift; sourceTree = "<group>"; };
 		4F5907301CEC574C009CD9BE /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
 		4F5907331CEC5EE0009CD9BE /* Utilites+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Utilites+Rx.swift"; sourceTree = "<group>"; };
@@ -157,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				4F08B5CA1CF3E5AA00CBD871 /* UserAPI.swift */,
+				4F08B5CD1CF3FE8E00CBD871 /* UsreManager.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -458,6 +462,7 @@
 				4F74583E1CCB54F000EF6783 /* ParameterSignable.swift in Sources */,
 				4F74580C1CCA4D0500EF6783 /* OAuthManager.swift in Sources */,
 				4FB2E0C71CCFA415002B4094 /* AccountManager.swift in Sources */,
+				4F08B5CE1CF3FE8E00CBD871 /* UsreManager.swift in Sources */,
 				4F08B5CB1CF3E5AA00CBD871 /* UserAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -488,6 +493,7 @@
 				4F7458161CCA530200EF6783 /* FanfouAPIManager.swift in Sources */,
 				4F1165201CE4BE1600B60404 /* FollowingStatus.swift in Sources */,
 				4F7458881CCB7F3700EF6783 /* APIConstants.swift in Sources */,
+				4F08B5CF1CF3FE8F00CBD871 /* UsreManager.swift in Sources */,
 				4F7458091CCA49D200EF6783 /* APIErrors.swift in Sources */,
 				4F74583F1CCB550400EF6783 /* ParameterSignable.swift in Sources */,
 				4F74580D1CCA4D0500EF6783 /* OAuthManager.swift in Sources */,
