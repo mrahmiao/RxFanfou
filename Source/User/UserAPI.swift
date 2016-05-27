@@ -24,17 +24,17 @@ extension API {
     case Show(String)
 
     var baseURL: NSURL {
-      return NSURL(string: "http://rest.fanfou.com/users/")!
+      return NSURL(string: "http://api.fanfou.com/users/")!
     }
 
     var path: String {
       switch self {
-      case .Followers(let userID, _, _):
-        return "\(userID)/followers/"
-      case .Followings(let userID, _, _):
-        return "\(userID)/friends"
-      case .Show(let userID):
-        return "\(userID)"
+      case .Followers(_):
+        return JSON("followers")
+      case .Followings(_):
+        return JSON("friends")
+      case .Show(_):
+        return JSON("show")
       }
     }
 
@@ -44,12 +44,18 @@ extension API {
 
     var parameters: [String : AnyObject]? {
       switch self {
-      case .Followers(_, let count, let page):
-        return API.parameters(withCount: count, page: page)
-      case .Followings(_, let count, let page):
-        return API.parameters(withCount: count, page: page)
-      case .Show(_):
-        return nil
+      case .Followers(let userID, let count, let page):
+        var params = API.parameters(withCount: count, page: page)
+        params["id"] = userID
+        return params
+      case .Followings(let userID, let count, let page):
+        var params = API.parameters(withCount: count, page: page)
+        params["id"] = userID
+        return params
+      case .Show(let userID):
+        return [
+          "id": userID
+        ]
       }
     }
   }
